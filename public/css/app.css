@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", sans-serif;
+}
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  background: #e9e6dd;
+  font-size: 13px;
+}
+
+#header {
+  background: #601507;
+}
+#header a {
+  color: #e9e6dd;
+}
+
+#footer {
+  background: #1d2932;
+  color: #e9e6dd;
+}
+
+a {
+  text-decoration: none;
+}
+
+.eventHead {
+  background: #601507;
+  color: #e9e6dd;
+  text-align: left;
+}
+.eventHead ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.eventHead ul li {
+  list-style: none;
+}
+
+.eventCard {
+  color: #1d2932;
+}
+.eventCard ul {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  gap: 5px 5px;
+  justify-content: left;
+  padding: 3px;
+}
+.eventCard ul li {
+  list-style: none;
+}
+.eventCard ul li ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventCard:nth-child(odd) ul {
+  background: #dcdcdc;
+}
+
+/*# sourceMappingURL=app.css.map */
