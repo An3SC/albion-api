@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
 
+// "proxy": "https://gameinfo.albiononline.com/api/gameinfo"
+
 const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
-        fetch('/events?limit=9', {
+        fetch('https://gameinfo.albiononline.com/api/gameinfo/events?limit=9', {
             'Content-Type': 'application/json',
         })
             .then((response) => {
