@@ -75,3 +75,53 @@ a {
 .eventCard:nth-child(odd) ul {
     background: $tertiary-color;
 }
+
+.gear {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 5px 5px;
+    grid-template-areas:
+        '. a b c .'
+        '. d e f .'
+        '. g h i .'
+        '. . j . .';
+    align-items: center;
+    div {
+        align-self: center;
+        justify-self: center;
+        height: 5rem;
+        width: 5rem;
+        background: $tertiary-color;
+    }
+    .item1 {
+        grid-area: a;
+    }
+    .item2 {
+        grid-area: b;
+    }
+    .item3 {
+        grid-area: c;
+    }
+    .item4 {
+        grid-area: d;
+    }
+    .item5 {
+        grid-area: e;
+    }
+    .item6 {
+        grid-area: f;
+    }
+    .item7 {
+        grid-area: g;
+    }
+    .item8 {
+        grid-area: h;
+    }
+    .item9 {
+        grid-area: i;
+    }
+    .item10 {
+        grid-area: j;
+    }
+}

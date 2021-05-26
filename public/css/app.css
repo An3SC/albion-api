@@ -63,4 +63,50 @@ a {
   background: #dcdcdc;
 }
 
+.gear {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 5px 5px;
+  grid-template-areas: ". a b c ." ". d e f ." ". g h i ." ". . j . .";
+  align-items: center;
+}
+.gear div {
+  align-self: center;
+  justify-self: center;
+  height: 5rem;
+  width: 5rem;
+  background: #dcdcdc;
+}
+.gear .item1 {
+  grid-area: a;
+}
+.gear .item2 {
+  grid-area: b;
+}
+.gear .item3 {
+  grid-area: c;
+}
+.gear .item4 {
+  grid-area: d;
+}
+.gear .item5 {
+  grid-area: e;
+}
+.gear .item6 {
+  grid-area: f;
+}
+.gear .item7 {
+  grid-area: g;
+}
+.gear .item8 {
+  grid-area: h;
+}
+.gear .item9 {
+  grid-area: i;
+}
+.gear .item10 {
+  grid-area: j;
+}
+
 /*# sourceMappingURL=app.css.map */
