@@ -7,6 +7,7 @@ const Events = () => {
     useEffect(() => {
         fetch('/events?limit=9', {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://modest-albion-api.netlify.app/',
         })
             .then((response) => {
                 if (response.ok) {
