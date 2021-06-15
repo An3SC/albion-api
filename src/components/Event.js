@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Gear from './Gear';
 import Inventory from './Inventory';
+import { Link } from 'react-router-dom';
 
 const Event = () => {
     const [event, setEvent] = useState(null);
@@ -56,12 +57,18 @@ const Event = () => {
             <h1>Event #{event && event.EventId}</h1>
             <div className="victimHead">
                 <div>
-                    <p>Killer: {event && event.Killer.Name}</p>
-                    <p>{event && event.Killer.GuildName}</p>
+                    <Link
+                        to={`/player/${event && event.Killer.Id}`}
+                        key={event && event.Killer.Id}
+                        className="playerCard"
+                    >
+                        <p>Killer: {event && event.Killer.Name}</p>
+                    </Link>
+                    <p>Guild: {event && event.Killer.GuildName}</p>
                 </div>
                 <div>
                     <p>Victim: {event && event.Victim.Name}</p>
-                    <p>{event && event.Victim.GuildName}</p>
+                    <p>Guild: {event && event.Victim.GuildName}</p>
                 </div>
                 <p>Participants: {event && event.numberOfParticipants}</p>
             </div>
@@ -70,7 +77,7 @@ const Event = () => {
                     <p>Killer's Gear</p>
                     <p>{event && finalIPKiller} IP</p>
                 </div>
-                <Gear />
+                <Gear eventId={event && event.EventId} killer={true} />
                 <div>
                     <div>{pName}</div>
                     <div>{pGuild}</div>
@@ -82,7 +89,7 @@ const Event = () => {
                     <p>Victim's Gear</p>
                     <p>{event && finalIPVictim} IP</p>
                 </div>
-                <Gear />
+                <Gear eventId={event && event.EventId} killer={false} />
             </div>
             <div className="eventGear">
                 <div>

@@ -46,13 +46,17 @@ const Events = () => {
                             </li>
                             <li>
                                 <ul>
-                                    <li>{e.Killer.Name}</li>
+                                    <li>
+                                        <b>{e.Killer.Name}</b>
+                                    </li>
                                     <li>{e.Killer.GuildName}</li>
                                 </ul>
                             </li>
                             <li>
                                 <ul>
-                                    <li>{e.Victim.Name}</li>
+                                    <li>
+                                        <b>{e.Victim.Name}</b>
+                                    </li>
                                     <li>{e.Victim.GuildName}</li>
                                 </ul>
                             </li>
