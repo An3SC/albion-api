@@ -1,12 +1,12 @@
 import React from 'react';
 import Events from './Events';
-import Player from './Player';
+import Players from './Players';
 
 const Home = () => {
     return (
         <div>
             <Events />
-            <Player />
+            <Players />
         </div>
     );
 };
