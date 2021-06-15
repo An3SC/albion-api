@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
 import Player from './components/Player';
+import Players from './components/Players';
 
 function App() {
     return (
@@ -14,7 +15,10 @@ function App() {
                 <Route path="/" exact>
                     <Home />
                 </Route>
-                <Route path="/player" exact>
+                <Route path="/players" exact>
+                    <Players />
+                </Route>
+                <Route path="/player/:id" exact>
                     <Player />
                 </Route>
                 <Route path="/events" exact>
