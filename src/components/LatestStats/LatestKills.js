@@ -5,7 +5,7 @@ const LatestKills = ({ id }) => {
     const [kills, setKills] = useState(null);
 
     useEffect(() => {
-        fetch(`/players/${id}/kills`, {
+        fetch(`https://gameinfo.albiononline.com/api/gameinfo/players/${id}/kills`, {
             'Content-Type': 'application/json',
         })
             .then((response) => {

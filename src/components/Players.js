@@ -7,7 +7,7 @@ const Player = () => {
 
     const handleSubmit = (s) => {
         s.preventDefault();
-        fetch(`/search?q=${search}`, {
+        fetch(`https://gameinfo.albiononline.com/api/gameinfo/search?q=${search}`, {
             'Content-Type': 'application/json',
         })
             .then((response) => {

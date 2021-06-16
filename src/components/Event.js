@@ -7,7 +7,7 @@ const Event = () => {
     const [event, setEvent] = useState(null);
     useEffect(() => {
         const eventParams = window.location.pathname.slice(7);
-        fetch(`/events/${eventParams}`, {
+        fetch(`https://gameinfo.albiononline.com/api/gameinfo/events/${eventParams}`, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
