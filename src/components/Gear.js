@@ -4,7 +4,7 @@ const Gear = ({ eventId, killer }) => {
     const [event, setEvent] = useState(null);
 
     useEffect(() => {
-        fetch(`https://gameinfo.albiononline.com/api/gameinfo/events/${eventId}`, {
+        fetch(`/events/${eventId}`, {
             'Content-Type': 'application/json',
         })
             .then((response) => {

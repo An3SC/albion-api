@@ -7,7 +7,7 @@ const Player = () => {
 
     useEffect(() => {
         const playerId = window.location.pathname.slice(7);
-        fetch(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerId}`, {
+        fetch(`/players/${playerId}`, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
