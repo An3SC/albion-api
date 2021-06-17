@@ -6,9 +6,11 @@ const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
         fetch('https://gameinfo.albiononline.com/api/gameinfo/events?limit=9', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET',
             },
         })
             .then((response) => {
