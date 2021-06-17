@@ -5,7 +5,7 @@ import Moment from 'moment';
 const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
-        fetchJsonp('https://gameinfo.albiononline.com/api/gameinfo/events?limit=9', {
+        fetch('/events?limit=9', {
             'Content-Type': 'application/json',
         })
             .then((response) => {
