@@ -34,12 +34,14 @@ const Player = () => {
                 />
                 <button>Go</button>
             </form>
-            {players &&
-                players.map((p) => (
-                    <Link to={`/player/${p.Id}`} key={p.Id} className="playerCard">
-                        <h1>Name: {p.Name}</h1>{' '}
-                    </Link>
-                ))}
+            <div>
+                {players &&
+                    players.map((p) => (
+                        <Link to={`/player/${p.Id}`} key={p.Id} className="playerCard">
+                            <p>{p.Name}</p>
+                        </Link>
+                    ))}
+            </div>
         </div>
     );
 };
