@@ -61,7 +61,10 @@ const Gear = ({ eventId, killer }) => {
                     </div>
                     <div className="item7">
                         {killerGear && killerGear.Food && (
-                            <img src={url + killerGear.Food.Type} alt="food" />
+                            <div>
+                                <img src={url + killerGear.Food.Type} alt="food" />
+                                <div className="count">{killerGear.Food.Count}</div>
+                            </div>
                         )}
                     </div>
                     <div className="item8">
@@ -71,7 +74,10 @@ const Gear = ({ eventId, killer }) => {
                     </div>
                     <div className="item9">
                         {killerGear && killerGear.Potion && (
-                            <img src={url + killerGear.Potion.Type} alt="potion" />
+                            <div>
+                                <img src={url + killerGear.Potion.Type} alt="potion" />
+                                <div className="count">{killerGear.Potion.Count}</div>
+                            </div>
                         )}
                     </div>
                     <div className="item10">
@@ -115,7 +121,10 @@ const Gear = ({ eventId, killer }) => {
                     </div>
                     <div className="item7">
                         {victimGear && victimGear.Food && (
-                            <img src={url + victimGear.Food.Type} alt="food" />
+                            <div>
+                                <img src={url + victimGear.Food.Type} alt="food" />
+                                <div className="count">{victimGear.Food.Count}</div>
+                            </div>
                         )}
                     </div>
                     <div className="item8">
@@ -125,7 +134,10 @@ const Gear = ({ eventId, killer }) => {
                     </div>
                     <div className="item9">
                         {victimGear && victimGear.Potion && (
-                            <img src={url + victimGear.Potion.Type} alt="potion" />
+                            <div>
+                                <img src={url + victimGear.Potion.Type} alt="potion" />
+                                <div className="count">{victimGear.Potion.Count}</div>
+                            </div>
                         )}
                     </div>
                     <div className="item10">
