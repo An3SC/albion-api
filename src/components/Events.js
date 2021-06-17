@@ -5,7 +5,9 @@ import Moment from 'moment';
 const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
-        fetch('https://gameinfo.albiononline.com/api/gameinfo/events?limit=9', {
+        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events?limit=9`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
+        fetch(url, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
@@ -20,6 +22,8 @@ const Events = () => {
             .catch((error) => console.log('Error fetching data: ', error));
     }, []);
 
+    const eventsResult = JSON.parse(events.contents);
+
     return (
         <div>
             <h1>Recent events</h1>
@@ -30,8 +34,8 @@ const Events = () => {
                     <li>Victim</li>
                 </ul>
             </div>
-            {events &&
-                events.map((e) => (
+            {eventsResult &&
+                eventsResult.map((e) => (
                     <Link
                         to={`/event/${e.EventId}`}
                         key={e.EventId}
