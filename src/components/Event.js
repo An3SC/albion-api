@@ -48,9 +48,9 @@ const Event = () => {
         pName = event && event.Participants[i].Name;
         pGuild = event && event.Participants[i].GuildName;
         pDamage = event && event.Participants[i].DamageDone;
-
-        console.log(pName, pGuild, pDamage);
     }
+
+    console.log(event);
 
     return (
         <div>
@@ -67,7 +67,13 @@ const Event = () => {
                     <p>Guild: {event && event.Killer.GuildName}</p>
                 </div>
                 <div>
-                    <p>Victim: {event && event.Victim.Name}</p>
+                    <Link
+                        to={`/player/${event && event.Victim.Id}`}
+                        key={event && event.Victim.Id}
+                        className="playerCard"
+                    >
+                        <p>Victim: {event && event.Victim.Name}</p>
+                    </Link>
                     <p>Guild: {event && event.Victim.GuildName}</p>
                 </div>
                 <p>Participants: {event && event.numberOfParticipants}</p>
@@ -95,7 +101,7 @@ const Event = () => {
                 <div>
                     <p>Victim's Inventory</p>
                 </div>
-                <Inventory />
+                <Inventory eventId={event && event.EventId} />
             </div>
         </div>
     );
