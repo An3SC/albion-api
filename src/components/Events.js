@@ -5,7 +5,7 @@ import Moment from 'moment';
 const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
-        fetch('https://modest-albion-api.netlify.app/events?limit=9', {
+        fetch('https://gameinfo.albiononline.com/api/gameinfo/events?limit=9', {
             'Content-Type': 'application/json',
         })
             .then((response) => {
