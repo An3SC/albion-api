@@ -22,7 +22,7 @@ const Events = () => {
             .catch((error) => console.log('Error fetching data: ', error));
     }, []);
 
-    const eventsResult = JSON.parse(events.contents);
+    const eventsResult = events && JSON.parse(events.contents);
 
     return (
         <div>
