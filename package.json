@@ -37,5 +37,5 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "https://gameinfo.albiononline.com/api/gameinfo"
+    "proxy": "https://api.allorigins.win/get?url="
 }
