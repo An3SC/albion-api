@@ -5,7 +5,7 @@ import Moment from 'moment';
 const Events = () => {
     const [events, setEvents] = useState(null);
     useEffect(() => {
-        fetch('/events?limit=9', {
+        fetch('https://modest-albion-api.netlify.app/events?limit=9', {
             'Content-Type': 'application/json',
         })
             .then((response) => {
