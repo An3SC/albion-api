@@ -15,6 +15,10 @@ $footer-color: #1d2932;
     font-family: $font;
 }
 
+* a {
+    text-decoration: none;
+}
+
 .App {
     width: 100vw;
     min-height: 100vh;
@@ -32,10 +36,6 @@ $footer-color: #1d2932;
 #footer {
     background: $footer-color;
     color: $back-color;
-}
-
-a {
-    text-decoration: none;
 }
 
 // Events
@@ -72,9 +72,12 @@ a {
     }
 }
 
-.eventCard:nth-child(odd) ul {
+.eventCard:nth-child(odd) ul,
+.deathCard:nth-child(odd) ul {
     background: $tertiary-color;
 }
+
+// Gear and inventory
 
 .gear {
     display: grid;
@@ -87,12 +90,16 @@ a {
         '. g h i .'
         '. . j . .';
     align-items: center;
-    div {
+    div:not(.count) {
         align-self: center;
         justify-self: center;
         height: 5rem;
         width: 5rem;
         background: $tertiary-color;
+    }
+    div img {
+        height: 5rem;
+        width: 5rem;
     }
     .item1 {
         grid-area: a;
@@ -124,4 +131,40 @@ a {
     .item10 {
         grid-area: j;
     }
+}
+
+#inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.inventoryItem {
+    height: 5rem;
+    width: 5rem;
+}
+
+.inventoryItem img {
+    height: 5rem;
+    width: 5rem;
+    z-index: 1;
+}
+
+.count {
+    position: relative;
+    color: white;
+    width: 1rem;
+    font-weight: bold;
+    font-size: 10px;
+    top: -30px;
+    left: 57px;
+    z-index: 2;
+}
+
+// player
+
+.playerCard {
+    font-size: 20px;
+    color: #1d2932;
+    text-decoration: underline;
 }
