@@ -38,7 +38,7 @@ const LatestKills = ({ id }) => {
             {kills &&
                 kills.map((k) => (
                     <Link
-                        to={`/kill/${k.EventId}`}
+                        to={`/event/${k.EventId}`}
                         key={k.BattleId}
                         className="deathCard"
                     >
