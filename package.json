@@ -37,5 +37,5 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "https://modest-albion-api.netlify.app/"
+    "proxy": "https://gameinfo.albiononline.com/api/gameinfo"
 }
