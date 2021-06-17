@@ -7,7 +7,9 @@ const Event = () => {
     const [event, setEvent] = useState(null);
     useEffect(() => {
         const eventParams = window.location.pathname.slice(7);
-        fetch(`/events/${eventParams}`, {
+        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events/${eventParams}`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
+        fetch(url, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
@@ -22,68 +24,75 @@ const Event = () => {
             .catch((error) => console.log('Error fetching data: ', error));
     }, []);
 
+    const eventResult = event && JSON.parse(event.contents);
+    const killerGear = eventResult && eventResult.Killer.Equipment;
+    const victimGear = eventResult && eventResult.Victim.Equipment;
+    const victimInventory = eventResult && eventResult.Victim.Inventory;
+
     const finalIPKiller =
-        Math.abs(event && event.Killer.AverageItemPower) > 999
-            ? Math.sign(event && event.Killer.AverageItemPower) *
-                  (Math.abs(event && event.Killer.AverageItemPower) / 1000).toFixed(2) +
+        Math.abs(eventResult && eventResult.Killer.AverageItemPower) > 999
+            ? Math.sign(eventResult && eventResult.Killer.AverageItemPower) *
+                  (
+                      Math.abs(eventResult && eventResult.Killer.AverageItemPower) / 1000
+                  ).toFixed(2) +
               'k'
             : Math.round(
-                  Math.sign(event && event.Killer.AverageItemPower) *
-                      Math.abs(event && event.Killer.AverageItemPower)
+                  Math.sign(eventResult && eventResult.Killer.AverageItemPower) *
+                      Math.abs(eventResult && eventResult.Killer.AverageItemPower)
               );
 
     const finalIPVictim =
-        Math.abs(event && event.Victim.AverageItemPower) > 999
-            ? Math.sign(event && event.Victim.AverageItemPower) *
-                  (Math.abs(event && event.Victim.AverageItemPower) / 1000).toFixed(2) +
+        Math.abs(eventResult && eventResult.Victim.AverageItemPower) > 999
+            ? Math.sign(eventResult && eventResult.Victim.AverageItemPower) *
+                  (
+                      Math.abs(eventResult && eventResult.Victim.AverageItemPower) / 1000
+                  ).toFixed(2) +
               'k'
             : Math.round(
-                  Math.sign(event && event.Victim.AverageItemPower) *
-                      Math.abs(event && event.Victim.AverageItemPower)
+                  Math.sign(eventResult && eventResult.Victim.AverageItemPower) *
+                      Math.abs(eventResult && eventResult.Victim.AverageItemPower)
               );
     let pName;
     let pGuild;
     let pDamage;
-    for (let i = 0; i < event && event.numberOfParticipants; i++) {
-        pName = event && event.Participants[i].Name;
-        pGuild = event && event.Participants[i].GuildName;
-        pDamage = event && event.Participants[i].DamageDone;
+    for (let i = 0; i < eventResult && eventResult.numberOfParticipants; i++) {
+        pName = eventResult && eventResult.Participants[i].Name;
+        pGuild = eventResult && eventResult.Participants[i].GuildName;
+        pDamage = eventResult && eventResult.Participants[i].DamageDone;
     }
-
-    console.log(event);
 
     return (
         <div>
-            <h1>Event #{event && event.EventId}</h1>
+            <h1>Event #{eventResult && eventResult.EventId}</h1>
             <div className="victimHead">
                 <div>
                     <Link
-                        to={`/player/${event && event.Killer.Id}`}
-                        key={event && event.Killer.Id}
+                        to={`/player/${eventResult && eventResult.Killer.Id}`}
+                        key={eventResult && eventResult.Killer.Id}
                         className="playerCard"
                     >
-                        <p>Killer: {event && event.Killer.Name}</p>
+                        <p>Killer: {eventResult && eventResult.Killer.Name}</p>
                     </Link>
-                    <p>Guild: {event && event.Killer.GuildName}</p>
+                    <p>Guild: {eventResult && eventResult.Killer.GuildName}</p>
                 </div>
                 <div>
                     <Link
-                        to={`/player/${event && event.Victim.Id}`}
-                        key={event && event.Victim.Id}
+                        to={`/player/${eventResult && eventResult.Victim.Id}`}
+                        key={eventResult && eventResult.Victim.Id}
                         className="playerCard"
                     >
-                        <p>Victim: {event && event.Victim.Name}</p>
+                        <p>Victim: {eventResult && eventResult.Victim.Name}</p>
                     </Link>
-                    <p>Guild: {event && event.Victim.GuildName}</p>
+                    <p>Guild: {eventResult && eventResult.Victim.GuildName}</p>
                 </div>
-                <p>Participants: {event && event.numberOfParticipants}</p>
+                <p>Participants: {eventResult && eventResult.numberOfParticipants}</p>
             </div>
             <div className="eventGear">
                 <div>
                     <p>Killer's Gear</p>
-                    <p>{event && finalIPKiller} IP</p>
+                    <p>{eventResult && finalIPKiller} IP</p>
                 </div>
-                <Gear eventId={event && event.EventId} killer={true} />
+                <Gear gear={eventResult && killerGear} killer={true} />
                 <div>
                     <div>{pName}</div>
                     <div>{pGuild}</div>
@@ -93,15 +102,15 @@ const Event = () => {
             <div className="eventGear">
                 <div>
                     <p>Victim's Gear</p>
-                    <p>{event && finalIPVictim} IP</p>
+                    <p>{eventResult && finalIPVictim} IP</p>
                 </div>
-                <Gear eventId={event && event.EventId} killer={false} />
+                <Gear gear={eventResult && victimGear} killer={false} />
             </div>
             <div className="eventGear">
                 <div>
                     <p>Victim's Inventory</p>
                 </div>
-                <Inventory eventId={event && event.EventId} />
+                <Inventory inventory={eventResult && victimInventory} />
             </div>
         </div>
     );

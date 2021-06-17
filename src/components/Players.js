@@ -7,7 +7,11 @@ const Player = () => {
 
     const handleSubmit = (s) => {
         s.preventDefault();
-        fetch(`/search?q=${search}`, {
+
+        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/search?q=${search}`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
+
+        fetch(url, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
@@ -17,11 +21,12 @@ const Player = () => {
                 throw response;
             })
             .then((data) => {
-                setPlayers(data.players);
-                console.log(data);
+                setPlayers(data.contents);
             })
             .catch((error) => console.log('Error fetching data: ', error));
     };
+
+    const playersResult = players && JSON.parse(players).players;
 
     return (
         <div>
@@ -35,8 +40,8 @@ const Player = () => {
                 <button>Go</button>
             </form>
             <div>
-                {players &&
-                    players.map((p) => (
+                {playersResult &&
+                    playersResult.map((p) => (
                         <Link to={`/player/${p.Id}`} key={p.Id} className="playerCard">
                             <p>{p.Name}</p>
                         </Link>

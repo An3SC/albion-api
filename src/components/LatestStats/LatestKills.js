@@ -5,7 +5,10 @@ const LatestKills = ({ id }) => {
     const [kills, setKills] = useState(null);
 
     useEffect(() => {
-        fetch(`/players/${id}/kills`, {
+        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/players/${id}/kills`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
+
+        fetch(url, {
             'Content-Type': 'application/json',
         })
             .then((response) => {
@@ -21,6 +24,8 @@ const LatestKills = ({ id }) => {
         // eslint-disable-next-line
     }, [id]);
 
+    const killsResult = kills && JSON.parse(kills.contents);
+
     function ip(power) {
         const ip =
             Math.abs(power) > 999
@@ -29,17 +34,17 @@ const LatestKills = ({ id }) => {
         return ip;
     }
 
-    // console.log(kills);
+    // console.log(killsResult);
 
     return (
         <div>
             <h3>Latest kills:</h3>
             <hr />
-            {kills &&
-                kills.map((k) => (
+            {killsResult &&
+                killsResult.map((k) => (
                     <Link
                         to={`/event/${k.EventId}`}
-                        key={k.BattleId}
+                        key={k.EventId}
                         className="deathCard"
                     >
                         <ul>
