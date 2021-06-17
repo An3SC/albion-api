@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Inventory = ({ inventory }) => {
-    console.log(inventory);
-
     const url = 'https://render.albiononline.com/v1/item/';
 
     return (
