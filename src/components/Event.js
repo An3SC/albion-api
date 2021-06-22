@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 const Event = () => {
     const [event, setEvent] = useState(null);
+    const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
         const eventParams = window.location.pathname.slice(7);
         const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events/${eventParams}`;
@@ -14,6 +16,7 @@ const Event = () => {
         })
             .then((response) => {
                 if (response.ok) {
+                    setLoaded(true);
                     return response.json();
                 }
                 throw response;
@@ -62,12 +65,23 @@ const Event = () => {
     }
 
     return (
-        <div>
+        <div id="event">
+            {!loaded && (
+                <div className="spinner">
+                    <div className="bounce1"></div>
+                    <div className="bounce2"></div>
+                    <div className="bounce3"></div>
+                </div>
+            )}
             <h1>Event #{eventResult && eventResult.EventId}</h1>
             <div className="victimHead">
                 <div>
                     <Link
-                        to={`/player/${eventResult && eventResult.Killer.Id}`}
+                        to={
+                            eventResult
+                                ? `/player/${eventResult && eventResult.Killer.Id}`
+                                : '#'
+                        }
                         key={eventResult && eventResult.Killer.Id}
                         className="playerCard"
                     >
@@ -77,7 +91,11 @@ const Event = () => {
                 </div>
                 <div>
                     <Link
-                        to={`/player/${eventResult && eventResult.Victim.Id}`}
+                        to={
+                            eventResult
+                                ? `/player/${eventResult && eventResult.Victim.Id}`
+                                : '#'
+                        }
                         key={eventResult && eventResult.Victim.Id}
                         className="playerCard"
                     >

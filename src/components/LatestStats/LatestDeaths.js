@@ -34,12 +34,22 @@ const LatestDeaths = ({ id }) => {
         return ip;
     }
 
-    // console.log(deaths);
+    console.log(deathsResult);
 
     return (
         <div>
             <h3>Latest deaths:</h3>
             <hr />
+            {!deathsResult && (
+                <div className="sk-chase">
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                </div>
+            )}
             {deathsResult &&
                 deathsResult.map((d) => (
                     <Link

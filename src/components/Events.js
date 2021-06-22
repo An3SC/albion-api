@@ -4,6 +4,8 @@ import Moment from 'moment';
 
 const Events = () => {
     const [events, setEvents] = useState(null);
+    const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
         const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events?limit=9`;
         const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
@@ -12,6 +14,7 @@ const Events = () => {
         })
             .then((response) => {
                 if (response.ok) {
+                    setLoaded(true);
                     return response.json();
                 }
                 throw response;
@@ -22,11 +25,50 @@ const Events = () => {
             .catch((error) => console.log('Error fetching data: ', error));
     }, []);
 
+    async function refreshPage() {
+        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events?limit=9`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
+        await fetch(url, {
+            'Content-Type': 'application/json',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    setLoaded(true);
+                    return response.json();
+                }
+                throw response;
+            })
+            .then((data) => {
+                setEvents(data);
+                window.location.reload(false);
+            })
+            .catch((error) => console.log('Error fetching data: ', error));
+    }
+
     const eventsResult = events && JSON.parse(events.contents);
 
     return (
-        <div>
-            <h1>Recent events</h1>
+        <div id="recentEvents">
+            <div className="eventsTitle">
+                <h1>Recent events</h1>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-refresh"
+                    width="45"
+                    height="45"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#1d2932"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    onClick={refreshPage}
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                </svg>
+            </div>
             <div className="eventHead">
                 <ul>
                     <li>Date</li>
@@ -34,6 +76,16 @@ const Events = () => {
                     <li>Victim</li>
                 </ul>
             </div>
+            {!loaded && (
+                <div className="sk-chase">
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                </div>
+            )}
             {eventsResult &&
                 eventsResult.map((e) => (
                     <Link

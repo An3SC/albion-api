@@ -40,6 +40,16 @@ const LatestKills = ({ id }) => {
         <div>
             <h3>Latest kills:</h3>
             <hr />
+            {!killsResult && (
+                <div className="sk-chase">
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                </div>
+            )}
             {killsResult &&
                 killsResult.map((k) => (
                     <Link

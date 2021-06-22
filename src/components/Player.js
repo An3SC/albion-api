@@ -4,6 +4,7 @@ import LatestKills from './LatestStats/LatestKills';
 
 const Player = () => {
     const [player, setPlayer] = useState(null);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         const playerId = window.location.pathname.slice(8);
@@ -16,6 +17,7 @@ const Player = () => {
         })
             .then((response) => {
                 if (response.ok) {
+                    setLoaded(true);
                     return response.json();
                 }
                 throw response;
@@ -49,12 +51,25 @@ const Player = () => {
               );
 
     return (
-        <div>
+        <div id="playerData">
+            {!loaded && (
+                <div className="spinner">
+                    <div className="bounce1"></div>
+                    <div className="bounce2"></div>
+                    <div className="bounce3"></div>
+                </div>
+            )}
             <h2>{playerResult && playerResult.Name}</h2>
             <ul>
-                <li>Name: {playerResult && playerResult.Name}</li>
-                <li>Guild: {playerResult && playerResult.GuildName}</li>
-                <li>Total fame: {finalFame} </li>
+                <li className="playerData">
+                    Name: <b>{playerResult && playerResult.Name}</b>
+                </li>
+                <li className="playerData">
+                    Guild: <b>{playerResult && playerResult.GuildName}</b>
+                </li>
+                <li className="playerData playerMB">
+                    Total fame: <b>{finalFame}</b>{' '}
+                </li>
                 <li>
                     <LatestDeaths id={playerResult && playerResult.Id} />
                 </li>
