@@ -11,7 +11,7 @@ const Events = () => {
         const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
         await fetch(url, {
             'Content-Type': 'application/json',
-            cache: 'no-store',
+            cache: 'no-cache',
         })
             .then((response) => {
                 if (response.ok) {
@@ -34,7 +34,7 @@ const Events = () => {
         setEvents(null);
         setLoaded(false);
         fetchApi();
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     const eventsResult = events && JSON.parse(events.contents);
