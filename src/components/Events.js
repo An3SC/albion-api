@@ -6,30 +6,12 @@ const Events = () => {
     const [events, setEvents] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events?limit=9`;
-        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
-        fetch(url, {
-            'Content-Type': 'application/json',
-        })
-            .then((response) => {
-                if (response.ok) {
-                    setLoaded(true);
-                    return response.json();
-                }
-                throw response;
-            })
-            .then((data) => {
-                setEvents(data);
-            })
-            .catch((error) => console.log('Error fetching data: ', error));
-    }, []);
-
-    async function refreshPage() {
+    const fetchApi = async () => {
         const albionApi = `https://gameinfo.albiononline.com/api/gameinfo/events?limit=9`;
         const url = `https://api.allorigins.win/get?url=${encodeURIComponent(albionApi)}`;
         await fetch(url, {
             'Content-Type': 'application/json',
+            cache: 'no-store',
         })
             .then((response) => {
                 if (response.ok) {
@@ -40,9 +22,19 @@ const Events = () => {
             })
             .then((data) => {
                 setEvents(data);
-                window.location.reload(false);
             })
             .catch((error) => console.log('Error fetching data: ', error));
+    };
+
+    useEffect(() => {
+        fetchApi();
+    }, []);
+
+    function refreshPage() {
+        setEvents(null);
+        setLoaded(false);
+        fetchApi();
+        window.location.reload(false);
     }
 
     const eventsResult = events && JSON.parse(events.contents);

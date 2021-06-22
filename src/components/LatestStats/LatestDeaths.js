@@ -34,7 +34,7 @@ const LatestDeaths = ({ id }) => {
         return ip;
     }
 
-    console.log(deathsResult);
+    // console.log(deathsResult);
 
     return (
         <div>
